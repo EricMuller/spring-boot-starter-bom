@@ -35,6 +35,7 @@
         </developer>
     </developers>
 
+
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <myProfile>default</myProfile>
@@ -66,6 +67,15 @@
         <maven-dependency-plugin.version>3.0.2</maven-dependency-plugin.version>
 
         <doxia-module-markdown.version>1.6</doxia-module-markdown.version>
+
+        <jacoco-maven-plugin.version>0.8.1-SNAPSHOT</jacoco-maven-plugin.version>
+        <sonar-maven-plugin.version>3.4.0.905</sonar-maven-plugin.version>
+
+        <!--<jacoco.reportPath>${project.basedir}/target/jacoco.exec</jacoco.reportPath>-->
+        <!--<sonar.junit.reportPaths>${project.basedir}/target/jacoco.exec</sonar.junit.reportPaths>-->
+        <sonar.core.codeCoveragePlugin>jacoco</sonar.core.codeCoveragePlugin>
+        <sonar.host.url>http://localhost:9000</sonar.host.url>
+
     </properties>
 
     <dependencyManagement>
@@ -225,9 +235,9 @@
                                 <goal>run</goal>
                             </goals>
                             <configuration>
-                                <tasks>
+                                <target>
                                     <echo>current active profile: ${myProfile}</echo>
-                                </tasks>
+                                </target>
                             </configuration>
                         </execution>
                     </executions>
@@ -247,6 +257,39 @@
                     </executions>
                 </plugin>
 
+                <!-- coverage -->
+                <plugin>
+                    <groupId>org.jacoco</groupId>
+                    <artifactId>jacoco-maven-plugin</artifactId>
+                    <version>${jacoco-maven-plugin.version}</version>
+                    <configuration>
+                        <append>true</append>
+                    </configuration>
+                    <executions>
+
+                        <execution>
+                            <goals>
+                                <goal>prepare-agent</goal>
+                            </goals>
+                        </execution>
+
+                        <execution>
+                            <id>report-aggregate</id>
+                            <phase>verify</phase>
+                            <goals>
+                                <goal>report-aggregate</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
+
+                <!-- sonar -->
+                <plugin>
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>sonar-maven-plugin</artifactId>
+                    <version>${sonar-maven-plugin.version}</version>
+                </plugin>
+
             </plugins>
         </pluginManagement>
     </build>
@@ -255,7 +298,7 @@
     <profiles>
         <profile>
             <!-- add pluginGroup in setting.xml
-     |          Specifies a further group identifier to use for plugin lookup.
+        |          Specifies a further group identifier to use for plugin lookup.
                 <pluginGroup>org.sonarsource.scanner.maven</pluginGroup>
             -->
             <id>run-sonar</id>
@@ -267,53 +310,10 @@
             </activation>
 
             <properties>
-                <jacoco.reportPath>${project.basedir}/../target/jacoco.exec</jacoco.reportPath>
-                <!--<jacoco.reportPath>${maven.multiModuleProjectDirectory}/target/jacoco_analysis/jacoco.exec</jacoco.reportPath>-->
-                <sonar.core.codeCoveragePlugin>jacoco</sonar.core.codeCoveragePlugin>
-                <sonar.jacoco.reportPaths>${project.basedir}/../target/jacoco.exec</sonar.jacoco.reportPaths>
-                <sonar.language>java</sonar.language>
                 <myProfile>run-sonar</myProfile>
-                <sonar.host.url>http://brix:9000</sonar.host.url>
             </properties>
 
             <build>
-                <pluginManagement>
-                    <plugins>
-                        <!-- sonar -->
-                        <plugin>
-                            <groupId>org.codehaus.mojo</groupId>
-                            <artifactId>sonar-maven-plugin</artifactId>
-                            <version>3.4.0.905</version>
-                        </plugin>
-
-                        <!-- coverage -->
-                        <plugin>
-                            <groupId>org.jacoco</groupId>
-                            <artifactId>jacoco-maven-plugin</artifactId>
-                            <version>0.7.2.201409121644</version>
-                            <configuration>
-                                <append>true</append>
-                                <destFile>${jacoco.reportPath}</destFile>
-                            </configuration>
-                            <executions>
-                                <execution>
-                                    <goals>
-                                        <goal>prepare-agent</goal>
-                                    </goals>
-                                </execution>
-                                <execution>
-                                    <id>post-unit-test</id>
-                                    <phase>test</phase>
-                                    <goals>
-                                        <goal>report</goal>
-                                    </goals>
-                                </execution>
-                            </executions>
-                        </plugin>
-
-                    </plugins>
-                </pluginManagement>
-
                 <plugins>
 
                     <plugin>
@@ -331,7 +331,6 @@
                     </plugin>
 
                 </plugins>
-
             </build>
 
         </profile>
@@ -339,8 +338,8 @@
 
     <pluginRepositories>
         <pluginRepository>
-            <!--swagger-codegen-maven-plugin-->
             <id>sonatype</id>
+            <name>sonatype-swagger-codegen-maven-plugin</name>
             <url>https://oss.sonatype.org/content/repositories/snapshots</url>
             <snapshots>
                 <enabled>true</enabled>
@@ -348,5 +347,12 @@
             </snapshots>
         </pluginRepository>
     </pluginRepositories>
+
+    <distributionManagement>
+        <repository>
+            <id>webmarks.net</id>
+            <url>ftps://webmarks.net/maven</url>
+        </repository>
+    </distributionManagement>
 
 </project>
