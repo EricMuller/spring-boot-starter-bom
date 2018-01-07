@@ -292,6 +292,16 @@
 
             </plugins>
         </pluginManagement>
+
+        <extensions>
+            <!-- Enabling the use of FTP -->
+            <extension>
+                <groupId>org.apache.maven.wagon</groupId>
+                <artifactId>wagon-ftp</artifactId>
+                <version>3.0.0</version>
+            </extension>
+        </extensions>
+
     </build>
 
 
@@ -351,7 +361,8 @@
     <distributionManagement>
         <repository>
             <id>webmarks.net</id>
-            <url>ftp://webmarks.net/maven</url>
+            <!--<url>ftp://webmarks.net/</url>-->
+            <url>file:/repo</url>
         </repository>
     </distributionManagement>
 
