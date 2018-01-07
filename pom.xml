@@ -351,7 +351,7 @@
     <distributionManagement>
         <repository>
             <id>webmarks.net</id>
-            <url>ftps://webmarks.net/maven</url>
+            <url>ftp://webmarks.net/maven</url>
         </repository>
     </distributionManagement>
 
