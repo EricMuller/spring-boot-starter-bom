@@ -5,7 +5,7 @@
 
     <groupId>com.emu.apps.starter</groupId>
     <artifactId>spring-boot-starter-bom</artifactId>
-    <version>1.0</version>
+    <version>1.5.14.RELEASE</version>
     <packaging>pom</packaging>
 
     <name>Spring Boot Sample Project</name>
@@ -42,7 +42,7 @@
         <!-- java -->
         <java.version>1.8</java.version>
         <!-- spring -->
-        <spring.boot.version>1.5.9.RELEASE</spring.boot.version>
+        <spring.boot.version>1.5.14.RELEASE</spring.boot.version>
         <spring.security.oauth2.version>2.0.12.RELEASE</spring.security.oauth2.version>
 
         <!-- spring tools -->
@@ -57,6 +57,7 @@
         <!-- apache common -->
         <commons-lang3.version>3.5</commons-lang3.version>
         <commons-io.version>2.6</commons-io.version>
+        <commons-collections4>4.1</commons-collections4>
 
         <!-- maven -->
         <maven-compiler-plugin.version>3.5.1</maven-compiler-plugin.version>
@@ -76,7 +77,30 @@
         <sonar.core.codeCoveragePlugin>jacoco</sonar.core.codeCoveragePlugin>
         <sonar.host.url>http://localhost:9000</sonar.host.url>
 
+        <ehcache.version>3.4.0</ehcache.version>
+        <cache-api.version>1.1.0</cache-api.version>
+
+        <spring.boot-data-jpa.version>1.5.14.RELEASE</spring.boot-data-jpa.version>
+        <hibernate.version>5.2.12.Final</hibernate.version>
+
+        <keycloak-adapter-bom.version>3.3.0.Final</keycloak-adapter-bom.version>
+
+
     </properties>
+    <dependencies>
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-core</artifactId>
+            <version>${hibernate.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-entitymanager</artifactId>
+            <version>${hibernate.version}</version>
+
+        </dependency>
+    </dependencies>
 
     <dependencyManagement>
 
@@ -88,6 +112,61 @@
                 <version>${spring.boot.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
+
+
+            </dependency>
+
+            <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-databind</artifactId>
+                <version>2.9.6</version>
+            </dependency>
+            <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-core</artifactId>
+                <version>2.9.6</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-annotations</artifactId>
+                <version>2.9.6</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.fasterxml.jackson.datatype</groupId>
+                <artifactId>jackson-datatype-jsr310</artifactId>
+                <version>2.9.6</version>
+            </dependency>
+
+
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-data-jpa</artifactId>
+                <version>${spring.boot-data-jpa.version}</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>org.hibernate</groupId>
+                        <artifactId>hibernate-core</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>org.hibernate</groupId>
+                        <artifactId>hibernate-entitymanager</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+
+            <!-- ehcache -->
+            <dependency>
+                <groupId>org.ehcache</groupId>
+                <artifactId>ehcache</artifactId>
+                <version>${ehcache.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>javax.cache</groupId>
+                <artifactId>cache-api</artifactId>
+                <version>${cache-api.version}</version>
             </dependency>
 
             <!-- security auth -->
@@ -101,6 +180,14 @@
                 <groupId>io.jsonwebtoken</groupId>
                 <artifactId>jjwt</artifactId>
                 <version>${jjwt.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.keycloak.bom</groupId>
+                <artifactId>keycloak-adapter-bom</artifactId>
+                <version>${keycloak-adapter-bom.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
             </dependency>
 
             <!-- mapper -->
@@ -142,6 +229,12 @@
                 <groupId>org.apache.commons</groupId>
                 <artifactId>commons-lang3</artifactId>
                 <version>${commons-lang3.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-collections4</artifactId>
+                <version>${commons-collections4}</version>
             </dependency>
 
             <dependency>
