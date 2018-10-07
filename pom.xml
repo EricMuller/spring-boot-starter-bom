@@ -5,7 +5,7 @@
 
     <groupId>com.emu.apps.starter</groupId>
     <artifactId>spring-boot-starter-bom</artifactId>
-    <version>1.5.14.RELEASE</version>
+    <version>2.0.3.RELEASE</version>
     <packaging>pom</packaging>
 
     <name>Spring Boot Sample Project</name>
@@ -35,22 +35,27 @@
         </developer>
     </developers>
 
-
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <myProfile>default</myProfile>
         <!-- java -->
-        <java.version>1.8</java.version>
+        <java.source.version>1.8</java.source.version>
+        <java.target.version>1.8</java.target.version>
         <!-- spring -->
-        <spring.boot.version>1.5.14.RELEASE</spring.boot.version>
-        <spring.security.oauth2.version>2.0.12.RELEASE</spring.security.oauth2.version>
+        <spring.boot.version>2.0.3.RELEASE</spring.boot.version>
+        <spring.security.oauth2.version>2.3.3.RELEASE</spring.security.oauth2.version>
 
         <!-- spring tools -->
-        <springfox-swagger2.version>2.7.0</springfox-swagger2.version>
-        <spring.dev.tools.version>1.5.1.RELEASE</spring.dev.tools.version>
+        <springfox-swagger2.version>2.9.2</springfox-swagger2.version>
+        <spring.dev.tools.version>2.0.3.RELEASE</spring.dev.tools.version>
+        <spring-restdocs.version>1.0.0.M1</spring-restdocs.version>
+        <spring-restdocs-mockmvc.version>2.0.2.RELEASE</spring-restdocs-mockmvc.version>
+        <asciidoctor-maven-plugin.version>1.5.2</asciidoctor-maven-plugin.version>
 
+        <!-- docs -->
+        <snippetsDirectory>${project.build.directory}/generated-ascii-doc</snippetsDirectory>
         <!-- tools -->
-        <mapstruct.version>1.2.0.Beta3</mapstruct.version>
+        <mapstruct.version>1.2.0.Final</mapstruct.version>
         <jjwt.version>0.7.0</jjwt.version>
         <jersey-client.version>1.19</jersey-client.version>
 
@@ -72,6 +77,7 @@
         <jacoco-maven-plugin.version>0.8.1-SNAPSHOT</jacoco-maven-plugin.version>
         <sonar-maven-plugin.version>3.4.0.905</sonar-maven-plugin.version>
 
+        <spring-boot-admin-starter-client.version>2.0.1</spring-boot-admin-starter-client.version>
         <!--<jacoco.reportPath>${project.basedir}/target/jacoco.exec</jacoco.reportPath>-->
         <!--<sonar.junit.reportPaths>${project.basedir}/target/jacoco.exec</sonar.junit.reportPaths>-->
         <sonar.core.codeCoveragePlugin>jacoco</sonar.core.codeCoveragePlugin>
@@ -83,11 +89,19 @@
         <spring.boot-data-jpa.version>1.5.14.RELEASE</spring.boot-data-jpa.version>
         <hibernate.version>5.2.12.Final</hibernate.version>
 
-        <keycloak-adapter-bom.version>3.3.0.Final</keycloak-adapter-bom.version>
+        <keycloak-adapter-bom.version>4.1.0.Final</keycloak-adapter-bom.version>
 
+        <guava.version>25.1-jre</guava.version>
+
+        <liquibase-core.version>3.6.2</liquibase-core.version>
+        <liquibase-hibernate5.version>3.6</liquibase-hibernate5.version>
+        <mariadb-java-client.version>2.2.6</mariadb-java-client.version>
+        <postgresql.version>42.2.4</postgresql.version>
 
     </properties>
+
     <dependencies>
+
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-core</artifactId>
@@ -100,6 +114,7 @@
             <version>${hibernate.version}</version>
 
         </dependency>
+
     </dependencies>
 
     <dependencyManagement>
@@ -112,8 +127,6 @@
                 <version>${spring.boot.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
-
-
             </dependency>
 
             <dependency>
@@ -169,6 +182,18 @@
                 <version>${cache-api.version}</version>
             </dependency>
 
+            <dependency>
+                <groupId>org.hibernate</groupId>
+                <artifactId>hibernate-ehcache</artifactId>
+                <version>${hibernate.version}</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>org.hibernate</groupId>
+                        <artifactId>hibernate-core</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+
             <!-- security auth -->
             <dependency>
                 <groupId>org.springframework.security.oauth</groupId>
@@ -197,6 +222,15 @@
                 <version>${mapstruct.version}</version>
             </dependency>
 
+            <!-- rest docs -->
+
+            <dependency>
+                <groupId>org.springframework.restdocs</groupId>
+                <artifactId>spring-restdocs-mockmvc</artifactId>
+                <version>${spring-restdocs-mockmvc.version}</version>
+                <scope>test</scope>
+            </dependency>
+
             <!-- swagger -->
             <dependency>
                 <groupId>io.springfox</groupId>
@@ -216,6 +250,13 @@
                 <groupId>io.springfox</groupId>
                 <artifactId>springfox-data-rest</artifactId>
                 <version>${springfox-swagger2.version}</version>
+            </dependency>
+
+            <!--monitor -->
+            <dependency>
+                <groupId>de.codecentric</groupId>
+                <artifactId>spring-boot-admin-starter-client</artifactId>
+                <version>${spring-boot-admin-starter-client.version}</version>
             </dependency>
 
             <!-- client rest -->
@@ -243,6 +284,36 @@
                 <version>${commons-io.version}</version>
             </dependency>
 
+            <dependency>
+                <groupId>com.google.guava</groupId>
+                <artifactId>guava</artifactId>
+                <version>${guava.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.liquibase</groupId>
+                <artifactId>liquibase-core</artifactId>
+                <version>${liquibase-core.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.liquibase</groupId>
+                <artifactId>liquibase-maven-plugin</artifactId>
+                <version>${liquibase-core.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.postgresql</groupId>
+                <artifactId>postgresql</artifactId>
+                <version>${postgresql.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.mariadb.jdbc</groupId>
+                <artifactId>mariadb-java-client</artifactId>
+                <version>${mariadb-java-client.version}</version>
+            </dependency>
+
         </dependencies>
     </dependencyManagement>
 
@@ -250,14 +321,23 @@
         <pluginManagement>
             <plugins>
 
+                <plugin>
+                    <groupId>org.liquibase</groupId>
+                    <artifactId>liquibase-maven-plugin</artifactId>
+                    <version>${liquibase-core.version}</version>
+                    <configuration>
+                        <propertyFile>src/main/resources/liquibase.properties</propertyFile>
+                    </configuration>
+                </plugin>
+
                 <!-- mapstruct mapper -->
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-compiler-plugin</artifactId>
                     <version>${maven-compiler-plugin.version}</version>
                     <configuration>
-                        <source>${java.version}</source>
-                        <target>${java.version}</target>
+                        <source>${java.source.version}</source>
+                        <target>${java.target.version}</target>
                         <annotationProcessorPaths>
                             <path>
                                 <groupId>org.mapstruct</groupId>
@@ -275,11 +355,24 @@
                     <version>${spring.boot.version}</version>
                     <executions>
                         <execution>
+                            <id>repackage</id>
                             <goals>
                                 <goal>repackage</goal>
                             </goals>
                         </execution>
+                        <execution>
+                            <id>build-info</id>
+                            <goals>
+                                <goal>build-info</goal>
+                            </goals>
+                        </execution>
                     </executions>
+                </plugin>
+
+                <plugin>
+                    <groupId>pl.project13.maven</groupId>
+                    <artifactId>git-commit-id-plugin</artifactId>
+                    <version>2.2.4</version>
                 </plugin>
 
                 <!-- site ?? -->
@@ -315,6 +408,15 @@
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-surefire-plugin</artifactId>
                     <version>${maven-surefire-plugin.version}</version>
+                    <configuration>
+                        <includes>
+                            <include>**/*Tests.java</include>
+                            <include>**/*Test.java</include>
+                        </includes>
+                        <excludes>
+                            <exclude>**/Abstract*.java</exclude>
+                        </excludes>
+                    </configuration>
                 </plugin>
 
                 <plugin>
@@ -383,7 +485,33 @@
                     <version>${sonar-maven-plugin.version}</version>
                 </plugin>
 
+
+                <plugin>
+                    <groupId>org.asciidoctor</groupId>
+                    <artifactId>asciidoctor-maven-plugin</artifactId>
+                    <version>${asciidoctor-maven-plugin.version}</version>
+                    <executions>
+                        <execution>
+                            <id>generate-docs</id>
+                            <phase>prepare-package</phase>
+                            <goals>
+                                <goal>process-asciidoc</goal>
+                            </goals>
+                            <configuration>
+                                <backend>html</backend>
+                                <doctype>book</doctype>
+                                <attributes>
+                                    <snippets>${project.build.directory}/generated-snippets</snippets>
+                                </attributes>
+                                <sourceDirectory>src/docs/asciidocs</sourceDirectory>
+                                <outputDirectory>target/generated-docs</outputDirectory>
+                            </configuration>
+                        </execution>
+                    </executions>
+                </plugin>
+
             </plugins>
+
         </pluginManagement>
 
         <extensions>
@@ -439,6 +567,7 @@
         </profile>
     </profiles>
 
+
     <pluginRepositories>
         <pluginRepository>
             <id>sonatype</id>
@@ -458,5 +587,6 @@
             <url>file:/repo</url>
         </repository>
     </distributionManagement>
+
 
 </project>
