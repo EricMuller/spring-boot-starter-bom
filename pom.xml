@@ -3,12 +3,12 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.emu.apps.starter</groupId>
+    <groupId>com.emu.starter</groupId>
     <artifactId>spring-boot-starter-bom</artifactId>
-    <version>1.5.9.RELEASE</version>
+    <version>1.5.9.SNAPSHOT</version>
     <packaging>pom</packaging>
 
-    <name>Spring Boot Sample Project</name>
+    <name>Spring Boot 1.5.X Starter Project</name>
     <description>Spring Boot 1.5x Starter Bom</description>
     <url>https://github.com/EricMuller/spring-boot-starter-bom</url>
 
@@ -27,7 +27,7 @@
 
     <developers>
         <developer>
-            <email>e.mul@free.fr</email>
+            <email>eric.pierre.muller@gmail.com</email>
             <name>Eric Muller</name>
             <url>https://github.com/EricMuller</url>
             <id>EricMuller</id>
@@ -452,11 +452,19 @@
     </pluginRepositories>
 
     <distributionManagement>
+
         <repository>
-            <id>webmarks.net</id>
-            <!--<url>ftp://webmarks.net/</url>-->
-            <url>file:/repo</url>
+            <id>webmarks-releases</id>
+            <name>Your Releases Repository</name>
+            <url>https://nexus.webmarks.net/nexus/repository/webmarks-releases/</url>
         </repository>
+
+        <snapshotRepository>
+            <id>webmarks-snapshots</id>
+            <name>Your Snapshot Repository</name>
+            <url>https://nexus.webmarks.net/nexus/repository/webmarks-snapshots/</url>
+        </snapshotRepository>
+
     </distributionManagement>
 
 </project>
