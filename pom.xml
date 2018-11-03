@@ -44,7 +44,6 @@
         <!-- spring -->
         <spring.boot.version>1.5.9.RELEASE</spring.boot.version>
         <spring.security.oauth2.version>2.0.12.RELEASE</spring.security.oauth2.version>
-
         <!-- spring tools -->
         <springfox-swagger2.version>2.7.0</springfox-swagger2.version>
         <spring.dev.tools.version>1.5.1.RELEASE</spring.dev.tools.version>
