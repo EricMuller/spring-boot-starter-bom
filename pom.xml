@@ -5,10 +5,10 @@
 
     <groupId>com.emu.apps.starter</groupId>
     <artifactId>spring-boot-starter-bom</artifactId>
-    <version>1.5.14.RELEASE</version>
+    <version>1.5.9-SNAPSHOT</version>
     <packaging>pom</packaging>
 
-    <name>Spring Boot Sample Project</name>
+    <name>Spring Boot 1.5.X Starter Project</name>
     <description>Spring Boot 1.5x Starter Bom</description>
     <url>https://github.com/EricMuller/spring-boot-starter-bom</url>
 
@@ -27,7 +27,7 @@
 
     <developers>
         <developer>
-            <email>e.mul@free.fr</email>
+            <email>eric.pierre.muller@gmail.com</email>
             <name>Eric Muller</name>
             <url>https://github.com/EricMuller</url>
             <id>EricMuller</id>
@@ -42,9 +42,8 @@
         <!-- java -->
         <java.version>1.8</java.version>
         <!-- spring -->
-        <spring.boot.version>1.5.14.RELEASE</spring.boot.version>
-        <spring.security.oauth2.version>2.0.16.RELEASE</spring.security.oauth2.version>
-
+        <spring.boot.version>1.5.9.RELEASE</spring.boot.version>
+        <spring.security.oauth2.version>2.0.12.RELEASE</spring.security.oauth2.version>
         <!-- spring tools -->
         <springfox-swagger2.version>2.7.0</springfox-swagger2.version>
         <spring.dev.tools.version>1.5.1.RELEASE</spring.dev.tools.version>
@@ -69,7 +68,7 @@
 
         <doxia-module-markdown.version>1.6</doxia-module-markdown.version>
 
-        <jacoco-maven-plugin.version>0.8.1-SNAPSHOT</jacoco-maven-plugin.version>
+        <jacoco-maven-plugin.version>0.8.2</jacoco-maven-plugin.version>
         <sonar-maven-plugin.version>3.4.0.905</sonar-maven-plugin.version>
 
         <!--<jacoco.reportPath>${project.basedir}/target/jacoco.exec</jacoco.reportPath>-->
@@ -439,24 +438,32 @@
         </profile>
     </profiles>
 
-    <pluginRepositories>
-        <pluginRepository>
-            <id>sonatype</id>
-            <name>sonatype-swagger-codegen-maven-plugin</name>
-            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
-            <snapshots>
-                <enabled>true</enabled>
-                <updatePolicy>always</updatePolicy>
-            </snapshots>
-        </pluginRepository>
-    </pluginRepositories>
+    <!--<pluginRepositories>-->
+        <!--<pluginRepository>-->
+            <!--<id>sonatype</id>-->
+            <!--<name>sonatype-swagger-codegen-maven-plugin</name>-->
+            <!--<url>https://oss.sonatype.org/content/repositories/snapshots</url>-->
+            <!--<snapshots>-->
+                <!--<enabled>true</enabled>-->
+                <!--<updatePolicy>always</updatePolicy>-->
+            <!--</snapshots>-->
+        <!--</pluginRepository>-->
+    <!--</pluginRepositories>-->
 
     <distributionManagement>
+
         <repository>
-            <id>webmarks.net</id>
-            <!--<url>ftp://webmarks.net/</url>-->
-            <url>file:/repo</url>
+            <id>webmarks-releases</id>
+            <name>Your Releases Repository</name>
+            <url>https://nexus.webmarks.net/nexus/repository/webmarks-releases/</url>
         </repository>
+
+        <snapshotRepository>
+            <id>webmarks-snapshots</id>
+            <name>Your Snapshot Repository</name>
+            <url>https://nexus.webmarks.net/nexus/repository/webmarks-snapshots/</url>
+        </snapshotRepository>
+
     </distributionManagement>
 
 </project>
