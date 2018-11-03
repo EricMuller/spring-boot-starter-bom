@@ -68,7 +68,7 @@
 
         <doxia-module-markdown.version>1.6</doxia-module-markdown.version>
 
-        <jacoco-maven-plugin.version>0.8.1-SNAPSHOT</jacoco-maven-plugin.version>
+        <jacoco-maven-plugin.version>0.8.2</jacoco-maven-plugin.version>
         <sonar-maven-plugin.version>3.4.0.905</sonar-maven-plugin.version>
 
         <!--<jacoco.reportPath>${project.basedir}/target/jacoco.exec</jacoco.reportPath>-->
