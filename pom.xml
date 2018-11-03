@@ -5,7 +5,7 @@
 
     <groupId>com.emu.starter</groupId>
     <artifactId>spring-boot-starter-bom</artifactId>
-    <version>1.5.9.SNAPSHOT</version>
+    <version>1.5.9-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <name>Spring Boot 1.5.X Starter Project</name>
