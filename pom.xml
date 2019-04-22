@@ -39,8 +39,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <myProfile>default</myProfile>
         <!-- java -->
-        <java.source.version>1.8</java.source.version>
-        <java.target.version>1.8</java.target.version>
+
         <!-- spring -->
         <spring.boot.version>2.0.4.RELEASE</spring.boot.version>
         <spring.security.oauth2.version>2.3.3.RELEASE</spring.security.oauth2.version>
@@ -69,11 +68,15 @@
 
         <!-- maven -->
         <maven-compiler-plugin.version>3.5.1</maven-compiler-plugin.version>
+        <java.source.version>1.8</java.source.version>
+        <java.target.version>1.8</java.target.version>
+        <build-helper-maven-plugin.version>3.0.0</build-helper-maven-plugin.version>
         <maven-source-plugin.version>2.4</maven-source-plugin.version>
         <maven-surefire-plugin.version>2.18.1</maven-surefire-plugin.version>
         <maven-antrun-plugin.version>1.8</maven-antrun-plugin.version>
         <maven-site-plugin.version>3.4</maven-site-plugin.version>
         <maven-dependency-plugin.version>3.0.2</maven-dependency-plugin.version>
+        <maven-jar-plugin.version>3.1.0</maven-jar-plugin.version>
 
         <doxia-module-markdown.version>1.6</doxia-module-markdown.version>
 
@@ -92,7 +95,9 @@
         <spring.boot-data-jpa.version>1.5.14.RELEASE</spring.boot-data-jpa.version>
         <hibernate.version>5.2.12.Final</hibernate.version>
 
-        <keycloak-adapter-bom.version>4.1.0.Final</keycloak-adapter-bom.version>
+        <!--<keycloak-adapter-bom.version>4.1.0.Final</keycloak-adapter-bom.version>*-->
+        <keycloak-adapter-bom.version>4.6.0.Final</keycloak-adapter-bom.version>
+
 
         <guava.version>25.1-jre</guava.version>
 
@@ -100,6 +105,9 @@
         <liquibase-hibernate5.version>3.6</liquibase-hibernate5.version>
         <mariadb-java-client.version>2.2.6</mariadb-java-client.version>
         <postgresql.version>42.2.4</postgresql.version>
+
+        <jooq.version>3.10.8</jooq.version>
+        <lombok.version>1.16.16</lombok.version>
 
     </properties>
 
@@ -293,6 +301,7 @@
                 <version>${jersey-client.version}</version>
             </dependency>
 
+            <!--tools-->
             <dependency>
                 <groupId>org.apache.commons</groupId>
                 <artifactId>commons-lang3</artifactId>
@@ -317,6 +326,15 @@
                 <version>${guava.version}</version>
             </dependency>
 
+            <!--code tools-->
+            <dependency>
+                <groupId>org.projectlombok</groupId>
+                <artifactId>lombok</artifactId>
+                <version>${lombok.version}</version>
+                <scope>provided</scope>
+            </dependency>
+
+            <!--database tools-->
             <dependency>
                 <groupId>org.liquibase</groupId>
                 <artifactId>liquibase-core</artifactId>
@@ -339,6 +357,12 @@
                 <groupId>org.mariadb.jdbc</groupId>
                 <artifactId>mariadb-java-client</artifactId>
                 <version>${mariadb-java-client.version}</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>org.apache.tomcat</groupId>
+                        <artifactId>tomcat-jdbc</artifactId>
+                    </exclusion>
+                </exclusions>
             </dependency>
 
             <dependency>
@@ -351,6 +375,25 @@
                 <groupId>org.hibernate</groupId>
                 <artifactId>hibernate-entitymanager</artifactId>
                 <version>${hibernate.version}</version>
+            </dependency>
+
+            <!--jooq -->
+            <dependency>
+                <groupId>org.jooq</groupId>
+                <artifactId>jooq</artifactId>
+                <version>${jooq.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.jooq</groupId>
+                <artifactId>jooq-meta</artifactId>
+                <version>${jooq.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.jooq</groupId>
+                <artifactId>jooq-codegen</artifactId>
+                <version>${jooq.version}</version>
             </dependency>
 
         </dependencies>
@@ -369,7 +412,14 @@
                     </configuration>
                 </plugin>
 
-                <!-- mapstruct mapper -->
+                <!--jooq-->
+                <plugin>
+                    <groupId>org.jooq</groupId>
+                    <artifactId>jooq-codegen-maven</artifactId>
+                    <version>${jooq.version}</version>
+                </plugin>
+
+                <!-- mapstruct -->
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-compiler-plugin</artifactId>
@@ -379,6 +429,11 @@
                         <target>${java.target.version}</target>
                         <annotationProcessorPaths>
                             <path>
+                                <groupId>org.projectlombok</groupId>
+                                <artifactId>lombok</artifactId>
+                                <version>${lombok.version}</version>
+                            </path>
+                            <path>
                                 <groupId>org.mapstruct</groupId>
                                 <artifactId>mapstruct-processor</artifactId>
                                 <version>${mapstruct.version}</version>
@@ -386,6 +441,26 @@
                         </annotationProcessorPaths>
                     </configuration>
                 </plugin>
+
+                <plugin>
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>build-helper-maven-plugin</artifactId>
+                    <version>${build-helper-maven-plugin.version}</version>
+                </plugin>
+
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-jar-plugin</artifactId>
+                    <version>${maven-jar-plugin.version}</version>
+                    <configuration>
+                        <archive>
+                            <manifestEntries>
+                                <Implementation-Version>${project.version}</Implementation-Version>
+                            </manifestEntries>
+                        </archive>
+                    </configuration>
+                </plugin>
+
 
                 <!-- spring-boot -->
                 <plugin>
