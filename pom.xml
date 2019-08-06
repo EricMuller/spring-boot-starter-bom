@@ -73,6 +73,7 @@
 
         <!-- maven -->
         <maven-compiler-plugin.version>3.8.0</maven-compiler-plugin.version>
+        <java.version>11</java.version>
         <maven.compiler.release>11</maven.compiler.release>
         <maven.compiler.source>11</maven.compiler.source>
 
@@ -113,6 +114,7 @@
 
         <jooq.version>3.11.11</jooq.version>
         <lombok.version>1.18.8</lombok.version>
+        <assertj-core.version>3.12.2</assertj-core.version>
 
     </properties>
 
@@ -415,6 +417,13 @@
                 <version>${doxia-module-markdown.version}</version>
             </dependency>
 
+            <!-- test -->
+            <dependency>
+                <groupId>org.assertj</groupId>
+                <artifactId>assertj-core</artifactId>
+                <version>${assertj-core.version}</version>
+                <scope>test</scope>
+            </dependency>
 
         </dependencies>
     </dependencyManagement>
@@ -521,7 +530,7 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-site-plugin</artifactId>
-                    <version>${maven-site-plugin.version}}</version>
+                    <version>${maven-site-plugin.version}</version>
                 </plugin>
 
                 <!-- source Plugin creates a jar archive of the source files of the current project. -->
@@ -694,6 +703,5 @@
         </profile>
 
     </profiles>
-
 
 </project>
