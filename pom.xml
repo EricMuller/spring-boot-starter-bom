@@ -41,12 +41,13 @@
         <!-- java -->
 
         <!-- spring -->
-        <spring.boot.version>2.2.0.RC1</spring.boot.version>
+        <spring.boot.version>2.2.3.RELEASE</spring.boot.version>
+        <spring.boot-data-jpa.version>2.2.3.RELEASE</spring.boot-data-jpa.version>
+        <spring-security.version>5.2.1.RELEASE</spring-security.version>
 
         <spring.security.oauth2.version>2.3.5.RELEASE</spring.security.oauth2.version>
-
-        <spring.boot-data-jpa.version>2.1.6.RELEASE</spring.boot-data-jpa.version>
         <hibernate.version>5.4.5.Final</hibernate.version>
+
 
         <!-- spring admin-->
         <spring-boot-admin-server.version>2.0.4</spring-boot-admin-server.version>
@@ -54,7 +55,7 @@
 
         <!-- spring tools -->
         <springfox-swagger2.version>3.0.0-SNAPSHOT</springfox-swagger2.version>
-        <spring.dev.tools.version>2.0.3.RELEASE</spring.dev.tools.version>
+        <spring.dev.tools.version>2.2.3.RELEASE</spring.dev.tools.version>
         <spring-restdocs.version>1.0.0.M1</spring-restdocs.version>
         <spring-restdocs-mockmvc.version>2.0.2.RELEASE</spring-restdocs-mockmvc.version>
         <asciidoctor-maven-plugin.version>1.5.2</asciidoctor-maven-plugin.version>
@@ -64,7 +65,7 @@
         <!-- tools -->
         <mapstruct.version>1.3.1.Final</mapstruct.version>
         <jjwt.version>0.7.0</jjwt.version>
-<!--        <jersey-client.version>1.19</jersey-client.version>-->
+        <!--        <jersey-client.version>1.19</jersey-client.version>-->
         <jaxb-api.version>2.3.0</jaxb-api.version>
 
         <!-- apache common -->
@@ -78,36 +79,34 @@
         <maven.compiler.release>11</maven.compiler.release>
         <maven.compiler.source>11</maven.compiler.source>
 
-
         <build-helper-maven-plugin.version>3.0.0</build-helper-maven-plugin.version>
         <maven-resources-plugin.version>3.1.0</maven-resources-plugin.version>
         <maven-source-plugin.version>2.4</maven-source-plugin.version>
-        <maven-surefire-plugin.version>2.18.1</maven-surefire-plugin.version>
+
         <maven-antrun-plugin.version>1.8</maven-antrun-plugin.version>
         <maven-site-plugin.version>3.4</maven-site-plugin.version>
         <maven-dependency-plugin.version>3.0.2</maven-dependency-plugin.version>
         <maven-jar-plugin.version>3.1.0</maven-jar-plugin.version>
 
-        <doxia-module-markdown.version>1.9</doxia-module-markdown.version>
-
-        <jacoco-maven-plugin.version>0.8.2</jacoco-maven-plugin.version>
-        <sonar-maven-plugin.version>3.4.0.905</sonar-maven-plugin.version>
+        <maven-surefire-plugin.version>2.22.2</maven-surefire-plugin.version>
 
 
+        <jacoco-maven-plugin.version>0.8.5</jacoco-maven-plugin.version>
+
+        <sonar-maven-plugin.version>3.7.0.1746</sonar-maven-plugin.version>
+
+        <junit-jupiter-engine.version>5.5.2</junit-jupiter-engine.version>
+        <junit.platform.version>1.2.0</junit.platform.version>
+        <slf4j-api.version>1.7.28</slf4j-api.version>
         <!--<jacoco.reportPath>${project.basedir}/target/jacoco.exec</jacoco.reportPath>-->
         <!--<sonar.junit.reportPaths>${project.basedir}/target/jacoco.exec</sonar.junit.reportPaths>-->
+
         <sonar.core.codeCoveragePlugin>jacoco</sonar.core.codeCoveragePlugin>
         <sonar.host.url>http://localhost:9000</sonar.host.url>
 
         <ehcache.version>3.4.0</ehcache.version>
         <cache-api.version>1.1.0</cache-api.version>
-
-
-
-        <!--<keycloak-adapter-bom.version>4.1.0.Final</keycloak-adapter-bom.version>-->
-        <keycloak-adapter-bom.version>4.6.0.Final</keycloak-adapter-bom.version>
-
-<!--        <keycloak-adapter-bom.version>7.0.0</keycloak-adapter-bom.version>-->
+        <doxia-module-markdown.version>1.9</doxia-module-markdown.version>
 
 
         <guava.version>25.1-jre</guava.version>
@@ -222,6 +221,26 @@
                 </exclusions>
             </dependency>
 
+            <!-- spring security oauth2/keycloak -->
+            <dependency>
+                <groupId>org.springframework.security</groupId>
+                <artifactId>spring-security-oauth2-client</artifactId>
+                <version>${spring-security.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework.security</groupId>
+                <artifactId>spring-security-oauth2-resource-server</artifactId>
+                <version>${spring-security.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework.security</groupId>
+                <artifactId>spring-security-oauth2-jose</artifactId>
+                <version>${spring-security.version}</version>
+            </dependency>
+
+
             <!-- security auth -->
             <dependency>
                 <groupId>org.springframework.security.oauth</groupId>
@@ -233,14 +252,6 @@
                 <groupId>io.jsonwebtoken</groupId>
                 <artifactId>jjwt</artifactId>
                 <version>${jjwt.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>org.keycloak.bom</groupId>
-                <artifactId>keycloak-adapter-bom</artifactId>
-                <version>${keycloak-adapter-bom.version}</version>
-                <type>pom</type>
-                <scope>import</scope>
             </dependency>
 
             <!-- mapper -->
@@ -316,13 +327,6 @@
                 <artifactId>spring-boot-admin-starter-client</artifactId>
                 <version>${spring-boot-admin-starter-client.version}</version>
             </dependency>
-
-            <!-- client rest -->
-<!--            <dependency>-->
-<!--                <groupId>com.sun.jersey</groupId>-->
-<!--                <artifactId>jersey-client</artifactId>-->
-<!--                <version>${jersey-client.version}</version>-->
-<!--            </dependency>-->
 
             <!--tools-->
             <dependency>
@@ -434,6 +438,18 @@
                 <scope>test</scope>
             </dependency>
 
+            <dependency>
+                <groupId>org.junit.jupiter</groupId>
+                <artifactId>junit-jupiter-engine</artifactId>
+                <version>${junit-jupiter-engine.version}</version>
+                <scope>test</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>org.slf4j</groupId>
+                <artifactId>slf4j-api</artifactId>
+                <version>${slf4j-api.version}</version>
+            </dependency>
 
 
         </dependencies>
@@ -549,7 +565,6 @@
                 </plugin>
 
 
-
                 <!-- site ?? -->
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
@@ -569,22 +584,6 @@
                             </goals>
                         </execution>
                     </executions>
-                </plugin>
-
-                <!-- surefire -->
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-surefire-plugin</artifactId>
-                    <version>${maven-surefire-plugin.version}</version>
-                    <configuration>
-                        <includes>
-                            <include>**/*Tests.java</include>
-                            <include>**/*Test.java</include>
-                        </includes>
-                        <excludes>
-                            <exclude>**/Abstract*.java</exclude>
-                        </excludes>
-                    </configuration>
                 </plugin>
 
                 <plugin>
@@ -620,30 +619,30 @@
                     </executions>
                 </plugin>
 
+                <!-- surefire -->
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-surefire-plugin</artifactId>
+                    <version>${maven-surefire-plugin.version}</version>
+                    <configuration>
+                        <useSystemClassLoader>false</useSystemClassLoader>
+                        <forkCount>1</forkCount>
+                        <reuseForks>false</reuseForks>
+                        <argLine>-Xmx1024m ${coverageAgent} -ea</argLine>
+                        <includes>
+                            <include>**/*Test.java</include>
+                        </includes>
+                        <excludes>
+                            <exclude>**/*IT.java</exclude>
+                        </excludes>
+                    </configuration>
+                </plugin>
+
                 <!-- coverage -->
                 <plugin>
                     <groupId>org.jacoco</groupId>
                     <artifactId>jacoco-maven-plugin</artifactId>
                     <version>${jacoco-maven-plugin.version}</version>
-                    <configuration>
-                        <append>true</append>
-                    </configuration>
-                    <executions>
-
-                        <execution>
-                            <goals>
-                                <goal>prepare-agent</goal>
-                            </goals>
-                        </execution>
-
-                        <execution>
-                            <id>report-aggregate</id>
-                            <phase>verify</phase>
-                            <goals>
-                                <goal>report-aggregate</goal>
-                            </goals>
-                        </execution>
-                    </executions>
                 </plugin>
 
                 <!-- sonar -->
@@ -683,7 +682,6 @@
         </pluginManagement>
 
     </build>
-
 
     <profiles>
         <profile>
