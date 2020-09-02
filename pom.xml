@@ -5,11 +5,11 @@
 
     <groupId>com.emu.apps.starter</groupId>
     <artifactId>spring-boot-starter-bom</artifactId>
-    <version>2.2.0-jdk11-SNAPSHOT</version>
+    <version>2.3.0-jdk11-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <name>Spring Boot 2 Starter Project</name>
-    <description>Spring Boot 2.2 Starter Bom</description>
+    <description>Spring Boot 2.3 Starter Bom</description>
     <url>https://github.com/EricMuller/spring-boot-starter-bom</url>
 
     <scm>
@@ -41,12 +41,11 @@
         <!-- java -->
 
         <!-- spring -->
-        <spring.boot.version>2.2.3.RELEASE</spring.boot.version>
-        <spring.boot-data-jpa.version>2.2.3.RELEASE</spring.boot-data-jpa.version>
+        <spring.boot.version>2.3.3.RELEASE</spring.boot.version>
+        <spring.boot-data-jpa.version>2.3.3.RELEASE</spring.boot-data-jpa.version>
         <spring-security.version>5.2.1.RELEASE</spring-security.version>
 
         <spring.security.oauth2.version>2.3.5.RELEASE</spring.security.oauth2.version>
-        <hibernate.version>5.4.5.Final</hibernate.version>
 
 
         <!-- spring admin-->
@@ -55,7 +54,7 @@
 
         <!-- spring tools -->
         <springfox-swagger2.version>3.0.0-SNAPSHOT</springfox-swagger2.version>
-        <spring.dev.tools.version>2.2.3.RELEASE</spring.dev.tools.version>
+        <spring.dev.tools.version>2.3.3.RELEASE</spring.dev.tools.version>
         <spring-restdocs.version>1.0.0.M1</spring-restdocs.version>
         <spring-restdocs-mockmvc.version>2.0.2.RELEASE</spring-restdocs-mockmvc.version>
         <asciidoctor-maven-plugin.version>1.5.2</asciidoctor-maven-plugin.version>
@@ -88,20 +87,20 @@
         <maven-dependency-plugin.version>3.0.2</maven-dependency-plugin.version>
         <maven-jar-plugin.version>3.1.0</maven-jar-plugin.version>
 
-        <maven-surefire-plugin.version>2.22.2</maven-surefire-plugin.version>
+        <maven-surefire-plugin.version>3.0.0-M5</maven-surefire-plugin.version>
 
 
         <jacoco-maven-plugin.version>0.8.5</jacoco-maven-plugin.version>
 
         <sonar-maven-plugin.version>3.7.0.1746</sonar-maven-plugin.version>
 
-        <junit-jupiter-engine.version>5.5.2</junit-jupiter-engine.version>
+        <junit-jupiter-engine.version>5.6.0</junit-jupiter-engine.version>
         <junit.platform.version>1.2.0</junit.platform.version>
         <slf4j-api.version>1.7.28</slf4j-api.version>
         <!--<jacoco.reportPath>${project.basedir}/target/jacoco.exec</jacoco.reportPath>-->
         <!--<sonar.junit.reportPaths>${project.basedir}/target/jacoco.exec</sonar.junit.reportPaths>-->
 
-        <sonar.core.codeCoveragePlugin>jacoco</sonar.core.codeCoveragePlugin>
+<!--        <sonar.core.codeCoveragePlugin>jacoco</sonar.core.codeCoveragePlugin>-->
         <sonar.host.url>http://localhost:9000</sonar.host.url>
 
         <ehcache.version>3.4.0</ehcache.version>
@@ -119,6 +118,7 @@
         <jooq.version>3.12.1</jooq.version>
         <lombok.version>1.18.8</lombok.version>
         <assertj-core.version>3.12.2</assertj-core.version>
+
 
     </properties>
 
@@ -184,42 +184,12 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-starter-data-jpa</artifactId>
                 <version>${spring.boot-data-jpa.version}</version>
-                <exclusions>
-                    <exclusion>
-                        <groupId>org.hibernate</groupId>
-                        <artifactId>hibernate-core</artifactId>
-                    </exclusion>
-                    <exclusion>
-                        <groupId>org.hibernate</groupId>
-                        <artifactId>hibernate-entitymanager</artifactId>
-                    </exclusion>
-                </exclusions>
             </dependency>
 
-            <!-- ehcache -->
-            <dependency>
-                <groupId>org.ehcache</groupId>
-                <artifactId>ehcache</artifactId>
-                <version>${ehcache.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>javax.cache</groupId>
-                <artifactId>cache-api</artifactId>
-                <version>${cache-api.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>org.hibernate</groupId>
-                <artifactId>hibernate-ehcache</artifactId>
-                <version>${hibernate.version}</version>
-                <exclusions>
-                    <exclusion>
-                        <groupId>org.hibernate</groupId>
-                        <artifactId>hibernate-core</artifactId>
-                    </exclusion>
-                </exclusions>
-            </dependency>
+            <!--            <dependency>-->
+            <!--                <groupId>org.hibernate</groupId>-->
+            <!--                <artifactId>hibernate-jcache</artifactId>-->
+            <!--            </dependency>-->
 
             <!-- spring security oauth2/keycloak -->
             <dependency>
@@ -392,18 +362,6 @@
                 </exclusions>
             </dependency>
 
-            <dependency>
-                <groupId>org.hibernate</groupId>
-                <artifactId>hibernate-core</artifactId>
-                <version>${hibernate.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>org.hibernate</groupId>
-                <artifactId>hibernate-entitymanager</artifactId>
-                <version>${hibernate.version}</version>
-            </dependency>
-
             <!--jooq -->
             <dependency>
                 <groupId>org.jooq</groupId>
@@ -451,6 +409,12 @@
                 <version>${slf4j-api.version}</version>
             </dependency>
 
+
+            <dependency>
+                <groupId>org.jetbrains</groupId>
+                <artifactId>annotations</artifactId>
+                <version>17.0.0</version>
+            </dependency>
 
         </dependencies>
     </dependencyManagement>
@@ -628,7 +592,7 @@
                         <useSystemClassLoader>false</useSystemClassLoader>
                         <forkCount>1</forkCount>
                         <reuseForks>false</reuseForks>
-                        <argLine>-Xmx1024m ${coverageAgent} -ea</argLine>
+<!--                        <argLine>-Xmx1024m ${coverageAgent} -ea</argLine>-->
                         <includes>
                             <include>**/*Test.java</include>
                         </includes>
@@ -683,49 +647,42 @@
 
     </build>
 
-    <profiles>
-        <profile>
-            <!-- add pluginGroup in setting.xml
-        |          Specifies a further group identifier to use for plugin lookup.
-                <pluginGroup>org.sonarsource.scanner.maven</pluginGroup>
-            -->
-            <id>run-sonar</id>
-            <activation>
-                <activeByDefault>false</activeByDefault>
-                <property>
-                    <name>run-sonar</name>
-                </property>
-            </activation>
+<!--    <profiles>-->
+<!--        <profile>-->
+<!--            &lt;!&ndash; add pluginGroup in setting.xml-->
+<!--        |          Specifies a further group identifier to use for plugin lookup.-->
+<!--                <pluginGroup>org.sonarsource.scanner.maven</pluginGroup>-->
+<!--            &ndash;&gt;-->
+<!--            <id>run-sonar</id>-->
+<!--            <activation>-->
+<!--                <activeByDefault>false</activeByDefault>-->
+<!--                <property>-->
+<!--                    <name>run-sonar</name>-->
+<!--                </property>-->
+<!--            </activation>-->
 
-            <properties>
-                <myProfile>run-sonar</myProfile>
-            </properties>
+<!--            <properties>-->
+<!--                <myProfile>run-sonar</myProfile>-->
+<!--            </properties>-->
 
-            <build>
-                <plugins>
+<!--            <build>-->
+<!--                <plugins>-->
+<!--                    <plugin>-->
+<!--                        <artifactId>maven-antrun-plugin</artifactId>-->
+<!--                    </plugin>-->
+<!--                    <plugin>-->
+<!--                        <groupId>org.jacoco</groupId>-->
+<!--                        <artifactId>jacoco-maven-plugin</artifactId>-->
+<!--                    </plugin>-->
+<!--                    <plugin>-->
+<!--                        <groupId>org.codehaus.mojo</groupId>-->
+<!--                        <artifactId>sonar-maven-plugin</artifactId>-->
+<!--                    </plugin>-->
+<!--                </plugins>-->
+<!--            </build>-->
 
-                    <plugin>
-                        <artifactId>maven-antrun-plugin</artifactId>
-                    </plugin>
-
-                    <plugin>
-                        <groupId>org.jacoco</groupId>
-                        <artifactId>jacoco-maven-plugin</artifactId>
-                    </plugin>
-
-                    <plugin>
-                        <groupId>org.codehaus.mojo</groupId>
-                        <artifactId>sonar-maven-plugin</artifactId>
-                    </plugin>
-
-                </plugins>
-
-            </build>
-
-        </profile>
-
-    </profiles>
-
+<!--        </profile>-->
+<!--    </profiles>-->
 
     <repositories>
         <repository>
@@ -734,6 +691,7 @@
             <url>https://repo.spring.io/milestone</url>
         </repository>
     </repositories>
+
     <pluginRepositories>
         <pluginRepository>
             <id>spring-milestones</id>
