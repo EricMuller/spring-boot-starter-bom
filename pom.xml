@@ -99,7 +99,7 @@
         <keycloak-adapter-bom.version>4.6.0.Final</keycloak-adapter-bom.version>
 
 
-        <guava.version>25.1-jre</guava.version>
+        <guava.version>29.0-jre</guava.version>
 
         <liquibase-core.version>3.6.2</liquibase-core.version>
         <liquibase-hibernate5.version>3.6</liquibase-hibernate5.version>
