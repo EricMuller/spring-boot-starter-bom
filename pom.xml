@@ -63,7 +63,7 @@
 
         <!-- apache common -->
         <commons-lang3.version>3.5</commons-lang3.version>
-        <commons-io.version>2.6</commons-io.version>
+        <commons-io.version>2.7</commons-io.version>
         <commons-collections4>4.1</commons-collections4>
 
         <!-- maven -->
