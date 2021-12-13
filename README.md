@@ -20,7 +20,7 @@ spring-boot-starter-bom configures a number of open source projects:
 
 * [SpringBoot] - Create stand-alone backend Spring applications
 * [Spring Data JPA]  - provides repository support for the Java Persistence API (JPA)
-* [SpringFoxSwagger] - Automated JSON API documentation for API's built with Spring
+* [SpringDoc] - Automated JSON API documentation for API's built with Spring
 * [JOOQ] - jOOQ generates Java code from your database and lets you build type safe SQL queries through its fluent API.
 * [MapStruct] - code generator that greatly simplifies the implementation of mappings between Java bean types  
 * [keycloak] - an open source identity and access management solution
@@ -38,6 +38,9 @@ spring-boot-starter-bom configures a number of open source projects:
 $ cd spring-boot-starter-bom
 $ maven install deploy -X
 ```
+### debug ssl
+
+-Djavax.net.debug=ssl
 
 License
 ----
