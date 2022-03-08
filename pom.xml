@@ -101,7 +101,7 @@
 
         <guava.version>25.1-jre</guava.version>
 
-        <liquibase-core.version>3.6.2</liquibase-core.version>
+        <liquibase-core.version>4.8.0</liquibase-core.version>
         <liquibase-hibernate5.version>3.6</liquibase-hibernate5.version>
         <mariadb-java-client.version>2.2.6</mariadb-java-client.version>
         <postgresql.version>42.2.4</postgresql.version>
