@@ -82,8 +82,8 @@
         <spring.security.oauth2.version>2.5.1.RELEASE</spring.security.oauth2.version>
 
         <!-- spring admin-->
-        <spring-boot-admin-server.version>2.0.4</spring-boot-admin-server.version>
-        <spring-boot-admin-starter-client.version>2.0.4</spring-boot-admin-starter-client.version>
+        <spring-boot-admin-server.version>2.5.4</spring-boot-admin-server.version>
+        <spring-boot-admin-starter-client.version>2.5.4</spring-boot-admin-starter-client.version>
 
         <!-- spring tools -->
         <spring.dev.tools.version>2.3.3.RELEASE</spring.dev.tools.version>
@@ -150,6 +150,8 @@
         <assertj-core.version>3.12.2</assertj-core.version>
         <project.scm.id>github</project.scm.id>
 
+
+        <testcontainers-postgresql.version>1.16.3</testcontainers-postgresql.version>
     </properties>
 
 
@@ -269,11 +271,11 @@
 
             <!--monitor -->
 
-            <dependency>
-                <groupId>de.codecentric</groupId>
-                <artifactId>spring-boot-admin-sample-custom-ui</artifactId>
-                <version>${spring-boot-admin-server.version}</version>
-            </dependency>
+<!--            <dependency>-->
+<!--                <groupId>de.codecentric</groupId>-->
+<!--                <artifactId>spring-boot-admin-sample-custom-ui</artifactId>-->
+<!--                <version>${spring-boot-admin-server.version}</version>-->
+<!--            </dependency>-->
 
             <dependency>
                 <groupId>de.codecentric</groupId>
@@ -389,6 +391,13 @@
                 <groupId>org.junit.jupiter</groupId>
                 <artifactId>junit-jupiter-engine</artifactId>
                 <version>${junit-jupiter-engine.version}</version>
+                <scope>test</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>org.testcontainers</groupId>
+                <artifactId>postgresql</artifactId>
+                <version>${testcontainers-postgresql.version}</version>
                 <scope>test</scope>
             </dependency>
 
@@ -513,13 +522,6 @@
                         </execution>
                     </executions>
                 </plugin>
-
-                <plugin>
-                    <groupId>pl.project13.maven</groupId>
-                    <artifactId>git-commit-id-plugin</artifactId>
-                    <version>3.0.1</version>
-                </plugin>
-
 
                 <!-- site ?? -->
                 <plugin>
