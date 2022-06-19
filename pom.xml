@@ -75,6 +75,7 @@
         <!-- java -->
 
         <!-- spring -->
+
         <spring.boot.version>2.5.4</spring.boot.version>
         <spring.boot-data-jpa.version>2.5.4</spring.boot-data-jpa.version>
         <spring-security.version>5.5.3</spring-security.version>
@@ -83,6 +84,7 @@
 
         <spring.security.oauth2.version>2.5.1.RELEASE</spring.security.oauth2.version>
         <jackson.version>2.12.4</jackson.version><!--        <version>2.13.3</version>-->
+
         <!-- spring admin-->
         <spring-boot-admin-server.version>2.5.4</spring-boot-admin-server.version>
         <spring-boot-admin-starter-client.version>2.5.4</spring-boot-admin-starter-client.version>
@@ -101,6 +103,7 @@
         <jaxb-api.version>2.3.0</jaxb-api.version>
 
         <!-- apache common -->
+
         <commons-lang3.version>3.9</commons-lang3.version>
         <commons-io.version>2.7</commons-io.version>
         <commons-collections4>4.4</commons-collections4>
