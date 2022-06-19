@@ -142,10 +142,10 @@
 
         <guava.version>29.0-jre</guava.version>
 
-        <liquibase-core.version>3.6.2</liquibase-core.version>
+        <liquibase-core.version>4.8.0</liquibase-core.version>
         <liquibase-hibernate5.version>3.6</liquibase-hibernate5.version>
         <mariadb-java-client.version>2.2.6</mariadb-java-client.version>
-        <postgresql.version>42.2.8</postgresql.version>
+        <postgresql.version>42.3.3</postgresql.version>
 
         <jooq.version>3.12.1</jooq.version>
         <lombok.version>1.18.10</lombok.version>
